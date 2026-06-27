@@ -1,0 +1,74 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLabels, defaultLocale } from '@i18n/utils';
+export { getStaticPaths } from '@i18n/utils';
+
+const labels = getLabels(Astro.currentLocale, 'privacy');
+const currentLocale = Astro.currentLocale || defaultLocale;
+---
+
+<Layout description={labels.description} title={labels.title}>
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+    <div class="flex flex-col gap-4 pb-16 text-center sm:pb-20">
+      <h1 class="text-4xl font-medium tracking-tight sm:text-5xl">{labels.heading}</h1>
+      <p class="text-muted text-base">{labels.lastUpdated}</p>
+    </div>
+    <div>
+      <p class="mb-4">{labels.intro}</p>
+      <h2 class="mt-12 mb-6 text-xl font-medium sm:text-2xl">{labels.dataControllerHeading}</h2>
+      <p class="mb-4">
+        <span set:html={labels.dataControllerText} />
+        <a href={getRelativeLocaleUrl(currentLocale, '/contact')} class="text-link font-bold">
+          {labels.contactFormLink}
+        </a>
+      </p>
+      <h2 class="mt-12 mb-6 text-xl font-medium sm:text-2xl">{labels.collectedDataHeading}</h2>
+      <h3 class="mt-6 mb-6 text-lg font-medium sm:text-xl">{labels.contactFormHeading}</h3>
+      <p class="mb-4">{labels.contactFormIntro}</p>
+      <ul class="mb-4 ml-6 list-outside list-disc space-y-2">
+        <li set:html={labels.identificationData} />
+        <li set:html={labels.contactData} />
+        <li set:html={labels.messageContent} />
+      </ul>
+      <p class="mb-4" set:html={labels.contactFormPurpose} />
+      <h3 class="mt-6 mb-6 text-lg font-medium sm:text-xl">{labels.securityHeading}</h3>
+      <p class="mb-4" set:html={labels.securityIntro} />
+      <p class="mb-4" set:html={labels.securityPurpose} />
+      <h3 class="mt-6 mb-6 text-lg font-medium sm:text-xl">{labels.hostingHeading}</h3>
+      <p class="mb-4" set:html={labels.hostingIntro} />
+      <p class="mb-4">{labels.hostingLogsText}</p>
+      <h2 class="mt-12 mb-6 text-xl font-medium sm:text-2xl">{labels.dataRecipientsHeading}</h2>
+      <p class="mb-4">{labels.dataRecipientsIntro}</p>
+      <ul class="mb-4 ml-6 list-outside list-disc space-y-2">
+        <li set:html={labels.githubRecipient} />
+        <li set:html={labels.basinRecipient} />
+        <li set:html={labels.cloudflareRecipient} />
+      </ul>
+      <p class="mb-4">{labels.dataTransfersText}</p>
+      <h2 class="mt-12 mb-6 text-xl font-medium sm:text-2xl">{labels.retentionPeriodHeading}</h2>
+      <ul class="mb-4 ml-6 list-outside list-disc space-y-2">
+        <li set:html={labels.contactRequestsRetention} />
+        <li set:html={labels.technicalLogsRetention} />
+      </ul>
+      <h2 class="mt-12 mb-6 text-xl font-medium sm:text-2xl">{labels.userRightsHeading}</h2>
+      <p class="mb-4">{labels.userRightsIntro}</p>
+      <ul class="mb-4 ml-6 list-outside list-disc space-y-2">
+        <li set:html={labels.rightOfAccess} />
+        <li set:html={labels.rightOfRectification} />
+        <li set:html={labels.rightToErasure} />
+        <li set:html={labels.rightToObjection} />
+        <li set:html={labels.rightToPortability} />
+      </ul>
+      <p class="mb-4">
+        {labels.exerciseRightsPrompt}
+        <a href={getRelativeLocaleUrl(currentLocale, '/contact')} class="text-link font-bold">
+          {labels.contactFormLink}
+        </a>
+        <span set:html={labels.cnilComplaintText} />
+      </p>
+      <h2 class="mt-12 mb-6 text-xl font-medium sm:text-2xl">{labels.cookiesHeading}</h2>
+      <p class="mb-4">{labels.cookiesText}</p>
+    </div>
+  </section>
+</Layout>

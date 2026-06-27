@@ -1,0 +1,124 @@
+---
+import ArrowRightUpIcon from '@assets/icons/arrow-right-up-line.svg';
+import CloseIcon from '@assets/icons/close-line.svg';
+import EqualIcon from '@assets/icons/equal-line.svg';
+import MoonIcon from '@assets/icons/moon-clear-line.svg';
+import SunIcon from '@assets/icons/sun-line.svg';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLabels, defaultLocale, locales, getRelativePath } from '@i18n/utils';
+
+const base = import.meta.env.BASE_URL;
+const labels = getLabels(Astro.currentLocale, 'layoutHeader');
+const currentLocale = Astro.currentLocale || defaultLocale;
+const currentLocaleIndex = locales.indexOf(currentLocale);
+const targetLocale = locales[(currentLocaleIndex + 1) % locales.length];
+const relativePath = getRelativePath(Astro.url.pathname, currentLocale);
+
+const links = [
+  {
+    ref: '01',
+    name: labels.home,
+    href: getRelativeLocaleUrl(currentLocale, '/'),
+  },
+  {
+    ref: '02',
+    name: labels.about,
+    href: getRelativeLocaleUrl(currentLocale, '/about'),
+  },
+  {
+    ref: '03',
+    name: labels.pricing,
+    href: getRelativeLocaleUrl(currentLocale, '/pricing'),
+  },
+  {
+    ref: '04',
+    name: labels.contact,
+    href: getRelativeLocaleUrl(currentLocale, '/contact'),
+  },
+];
+---
+
+<header x-data="{ open: false }" class="bg-surface transition">
+  <div class="mx-auto flex max-w-2xl items-center justify-between px-4 py-4 sm:px-6 sm:py-6 lg:max-w-7xl lg:px-8">
+    <!-- Brand logo -->
+    <div class="flex">
+      <a href={getRelativeLocaleUrl(currentLocale, '/')} class="group-focus-outline rounded-md">
+        <img class="mr-1 inline" width="32" height="32" src={`${base}/logo.svg`} alt={labels.companyName} />
+        <span class="align-middle text-xl font-bold">{labels.companyName}</span>
+      </a>
+    </div>
+
+    <!-- Actions -->
+    <div class="-mr-2 flex items-center space-x-2 sm:space-x-3">
+      <!-- Language switch -->
+      <a
+        href={getRelativeLocaleUrl(targetLocale, relativePath)}
+        class="header-action font-medium"
+        x-data
+        @click={`$store.language.setLang('${targetLocale}')`}
+      >
+        <span class="sr-only">{labels.toggleLanguage}</span>
+        {targetLocale.toUpperCase()}
+      </a>
+
+      <!-- Toggle theme mode -->
+      <button type="button" class="header-action" x-data @click="$store.theme.toggle()">
+        <span class="sr-only">{labels.toggleTheme}</span>
+        <SunIcon class="hidden h-6 w-6 dark:block" aria-hidden="true" />
+        <MoonIcon class="block h-6 w-6 dark:hidden" aria-hidden="true" />
+      </button>
+
+      <!-- Toggle menu -->
+      <button
+        type="button"
+        class="header-action"
+        @click="open = !open"
+        @mousedown="open && $event.preventDefault()"
+        aria-controls="website-menu"
+        aria-expanded="false"
+        :aria-expanded="open.toString()"
+      >
+        <span class="sr-only">{labels.toggleMenu}</span>
+        <EqualIcon x-show="!open" class="h-8 w-8" aria-hidden="true" />
+        <CloseIcon x-show="open" x-cloak class="h-8 w-8" aria-hidden="true" />
+      </button>
+    </div>
+  </div>
+
+  <!-- Menu content -->
+  <div
+    class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8"
+    id="website-menu"
+    x-show="open"
+    x-cloak
+    x-collapse
+    x-collapse.duration.500ms
+  >
+    <div class="grid grid-cols-1 gap-16 pt-6 pb-24 lg:grid-cols-2 lg:pt-12">
+      <div class="bg-surface hidden items-center justify-center rounded-3xl px-6 py-8 lg:flex">
+        <p class="text-muted max-w-sm text-xl leading-loose italic" set:html={labels.description} />
+      </div>
+
+      <!-- Navigation -->
+      <nav class="divide-subtle flex flex-col gap-1 divide-y">
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class="group inline-flex py-6 text-3xl font-medium tracking-tight transition focus-visible:outline-hidden sm:py-8 sm:text-4xl"
+              aria-current={Astro.url.pathname === link.href ? 'page' : undefined}
+            >
+              <div class="group-focus-outline flex flex-1 items-center justify-between rounded-3xl">
+                <div class="flex items-center gap-6">
+                  <span class="text-xs">{link.ref}</span>
+                  <span class="group-hover:underline">{link.name}</span>
+                </div>
+                <ArrowRightUpIcon class="icon-primary sm:h-8 sm:w-8" aria-hidden="true" />
+              </div>
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+  </div>
+</header>

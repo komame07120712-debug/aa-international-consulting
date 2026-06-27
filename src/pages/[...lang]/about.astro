@@ -1,0 +1,18 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Heading from '@components/about/Heading.astro';
+import Mission from '@components/about/Mission.astro';
+import Team from '@components/about/Team.astro';
+import Values from '@components/about/Values.astro';
+import { getLabels } from '@i18n/utils';
+export { getStaticPaths } from '@i18n/utils';
+
+const labels = getLabels(Astro.currentLocale, 'about');
+---
+
+<Layout description={labels.description} title={labels.title}>
+  <Heading />
+  <Mission />
+  <Values />
+  <Team />
+</Layout>

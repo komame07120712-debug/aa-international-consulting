@@ -1,0 +1,23 @@
+---
+import InfoCardIcon from '@assets/icons/info-card-line.svg';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLabels, defaultLocale } from '@i18n/utils';
+
+const labels = getLabels(Astro.currentLocale, 'homeAbout');
+const currentLocale = Astro.currentLocale || defaultLocale;
+---
+
+<section class="py-16 sm:py-20">
+  <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+    <div class="grid gap-12 lg:grid-cols-3 lg:gap-8">
+      <div class="flex gap-4">
+        <InfoCardIcon class="fill-primary-500 h-8 w-8 shrink-0 sm:h-10 sm:w-10" aria-hidden="true" />
+        <h2 class="text-3xl font-medium tracking-tight sm:text-4xl">{labels.title}</h2>
+      </div>
+      <div class="flex flex-col items-start gap-8 sm:gap-10 lg:col-span-2">
+        <p class="text-muted text-base sm:text-lg">{labels.description}</p>
+        <a href={getRelativeLocaleUrl(currentLocale, '/about')} class="btn-primary">{labels.cta}</a>
+      </div>
+    </div>
+  </div>
+</section>

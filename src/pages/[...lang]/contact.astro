@@ -1,0 +1,20 @@
+---
+import Layout from '@layouts/Layout.astro';
+import ContactForm from '@components/contact/ContactForm.astro';
+import ContactInfo from '@components/contact/ContactInfo.astro';
+import { getLabels } from '@i18n/utils';
+export { getStaticPaths } from '@i18n/utils';
+
+const labels = getLabels(Astro.currentLocale, 'contact');
+---
+
+<Layout description={labels.description} title={labels.title}>
+  <script
+    slot="head"
+    is:inline
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad"
+    async
+    defer></script>
+  <ContactInfo />
+  <ContactForm />
+</Layout>

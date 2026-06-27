@@ -1,0 +1,88 @@
+@import 'tailwindcss';
+
+@variant dark (&:is(.dark *));
+
+[x-cloak] {
+  display: none !important;
+}
+
+@theme {
+  --color-*: initial;
+  --color-current: currentColor;
+  --color-transparent: transparent;
+  --color-white: #ffffff;
+
+  --color-primary-50: #f7f9fc;
+  --color-primary-100: #eef2f7;
+  --color-primary-200: #dce4ed;
+  --color-primary-300: #74d4ff;
+  --color-primary-400: #00bcff;
+  --color-primary-500: #00a6f4;
+  --color-primary-600: #0084d1;
+  --color-primary-700: #0069a8;
+  --color-primary-800: #00598a;
+  --color-primary-900: #024a70;
+  --color-primary-950: #060a0e;
+
+  --font-*: initial;
+  --font-sans: var(--font-inter);
+
+  --animate-marquee: marquee 30s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+}
+
+@utility bg-primary {
+  @apply bg-primary-50 dark:bg-primary-950;
+}
+
+@utility bg-surface {
+  @apply bg-primary-500/10 dark:bg-primary-400/10;
+}
+
+@utility text-primary {
+  @apply text-primary-950 dark:text-primary-200;
+}
+
+@utility text-muted {
+  @apply text-primary-950/70 dark:text-primary-200/70;
+}
+
+@utility border-subtle {
+  @apply border-primary-900/10 dark:border-primary-300/10;
+}
+
+@utility divide-subtle {
+  @apply divide-primary-900/10 dark:divide-primary-300/10;
+}
+
+@utility header-action {
+  @apply hover:bg-primary-500/10 dark:hover:bg-primary-400/10 ring-primary-950 dark:ring-primary-200 inline-flex h-14 w-14 items-center justify-center rounded-full transition focus:outline-hidden focus-visible:ring-2;
+}
+
+@utility text-link {
+  @apply focus-visible:outline-primary-950 dark:focus-visible:outline-primary-200 inline-flex items-center gap-1 rounded-md text-base hover:underline focus-visible:outline-2;
+}
+
+@utility group-focus-outline {
+  @apply group-focus-visible:outline-primary-950 dark:group-focus-visible:outline-primary-200 group-focus-visible:outline-2 group-focus-visible:outline-offset-2;
+}
+
+@utility form-element {
+  @apply hover:ring-primary-600 focus:ring-primary-600 dark:hover:ring-primary-400 dark:focus:ring-primary-400 bg-primary-50 dark:bg-primary-950 ring-primary-900/40 dark:ring-primary-200/40 placeholder:text-primary-950/60 dark:placeholder:text-primary-200/60 block w-full appearance-none rounded-md border-0 px-4 py-4 text-base ring-1 transition focus:ring-2 focus:outline-hidden;
+}
+
+@utility btn-primary {
+  @apply bg-primary-600 dark:bg-primary-400 hover:bg-primary-700 dark:hover:bg-primary-300 focus-visible:outline-primary-600 dark:focus-visible:outline-primary-400 dark:text-primary-950 inline-flex items-center justify-center rounded-full border border-transparent px-5 py-3 text-base font-medium text-white transition focus-visible:outline-2 focus-visible:outline-offset-2;
+}
+
+@utility icon-primary {
+  @apply text-primary-600 dark:text-primary-400 h-6 w-6;
+}

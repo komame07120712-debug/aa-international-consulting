@@ -1,0 +1,101 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { getLabels } from '@i18n/utils';
+export { getStaticPaths } from '@i18n/utils';
+
+const base = import.meta.env.BASE_URL;
+const labels = getLabels(Astro.currentLocale, 'styleguide');
+
+const colors = [
+  { name: 'white', value: 'bg-white' },
+  { name: '50', value: 'bg-primary-50' },
+  { name: '100', value: 'bg-primary-100' },
+  { name: '200', value: 'bg-primary-200' },
+  { name: '300', value: 'bg-primary-300' },
+  { name: '400', value: 'bg-primary-400' },
+  { name: '500', value: 'bg-primary-500' },
+  { name: '600', value: 'bg-primary-600' },
+  { name: '700', value: 'bg-primary-700' },
+  { name: '800', value: 'bg-primary-800' },
+  { name: '900', value: 'bg-primary-900' },
+  { name: '950', value: 'bg-primary-950' },
+];
+---
+
+<Layout description={labels.description} title={labels.title} noindex>
+  <header class="py-16 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:max-w-7xl lg:px-8">
+      <div class="flex flex-col gap-4 sm:gap-6">
+        <h1 class="text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">{labels.heading}</h1>
+        <p class="text-muted mx-auto max-w-sm text-lg sm:text-xl">{labels.description}</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+      <div class="flex flex-col gap-16">
+        <h2 class="text-3xl font-medium tracking-tight sm:text-4xl">{labels.logoDesc}</h2>
+        <div class="flex items-center gap-1">
+          <img width="50" height="50" src={`${base}/logo.svg`} alt={labels.companyName} />
+          <span class="text-3xl font-bold">{labels.companyName}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+      <div class="flex flex-col gap-16">
+        <h2 class="text-3xl font-medium tracking-tight sm:text-4xl">{labels.colorsDesc}</h2>
+        <div class="grid grid-cols-2 gap-12 sm:grid-cols-6">
+          {
+            colors.map((color) => (
+              <div class="relative flex">
+                <div class="flex flex-col gap-2">
+                  <div class={`border-subtle h-16 w-16 rounded-md border ${color.value}`} />
+                  <div class="text-sm font-medium">{color.name}</div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+      <div class="flex flex-col gap-16">
+        <h2 class="text-3xl font-medium tracking-tight sm:text-4xl">{labels.typoDesc}</h2>
+        <div class="flex flex-col gap-16 sm:flex-row">
+          <div class="flex flex-col gap-8">
+            <div class="bg-surface flex w-64 flex-col items-center gap-3 rounded-md p-6">
+              <p class="text-5xl">Aa</p>
+              <p class="text-muted text-base">Inter</p>
+            </div>
+            <div class="bg-surface flex w-64 flex-col items-center gap-3 rounded-md p-6">
+              <p class="text-5xl font-medium">Aa</p>
+              <p class="text-muted text-base">Inter Medium</p>
+            </div>
+          </div>
+          <div class="flex flex-col gap-4">
+            <p class="text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">{labels.h1Demo}</p>
+            <p class="text-3xl font-medium tracking-tight sm:text-4xl">{labels.h2Demo}</p>
+            <p class="text-xl font-medium sm:text-2xl">{labels.h3Demo}</p>
+            <p class="text-lg sm:text-xl">{labels.subtitleDemo}</p>
+            <p class="text-base font-medium">{labels.boldDemo}</p>
+            <p class="text-base">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste
+              dolor cupiditate blanditiis ratione. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores
+              impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione. Lorem ipsum, dolor sit amet
+              consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis
+              ratione. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit
+              eaque, iste dolor cupiditate.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

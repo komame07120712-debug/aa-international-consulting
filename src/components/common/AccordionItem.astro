@@ -1,0 +1,39 @@
+---
+import ArrowDownIcon from '@assets/icons/arrow-down-s-line.svg';
+
+interface Props {
+  id: string;
+  index: number;
+}
+
+const { id, index } = Astro.props;
+---
+
+<div class="rounded-3xl px-4 transition" x-data={`accordionItem(${index})`} x-bind:class="{ 'bg-surface': isOpen() }">
+  <dt
+    class="border-b text-lg transition"
+    x-bind:class="{ 'border-transparent': isOpen() || isNextOpen(), 'border-subtle': !(isOpen() || isNextOpen()) }"
+  >
+    <button
+      type="button"
+      class="group block w-full py-6 text-left transition focus-visible:outline-hidden"
+      aria-controls={id}
+      x-on:click="toggle(id)"
+      x-bind:aria-expanded="isOpen().toString()"
+    >
+      <div class="group-focus-outline flex items-center justify-between rounded-3xl">
+        <slot name="header" />
+        <span class="ml-6 flex h-7 items-center">
+          <ArrowDownIcon
+            class="icon-primary rotate-0 transform transition duration-200 ease-in-out"
+            x-bind:class="{ '-rotate-180': isOpen(), 'rotate-0': !isOpen() }"
+            aria-hidden="true"
+          />
+        </span>
+      </div>
+    </button>
+  </dt>
+  <dd id={id} x-show="isOpen()" x-cloak x-collapse>
+    <slot name="body" />
+  </dd>
+</div>

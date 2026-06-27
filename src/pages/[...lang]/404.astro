@@ -1,0 +1,26 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLabels, defaultLocale } from '@i18n/utils';
+export { getStaticPaths } from '@i18n/utils';
+
+const labels = getLabels(Astro.currentLocale, '404');
+const currentLocale = Astro.currentLocale || defaultLocale;
+---
+
+<Layout description={labels.description} title={labels.title}>
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+      <div class="flex flex-col items-start gap-8 sm:gap-10">
+        <div class="flex flex-col gap-4 sm:gap-6">
+          <h1 class="text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">
+            <div>404</div>
+            <div>{labels.heading}</div>
+          </h1>
+          <p class="text-muted text-lg sm:text-xl">{labels.message}</p>
+        </div>
+        <a href={getRelativeLocaleUrl(currentLocale, '/')} class="btn-primary">{labels.back}</a>
+      </div>
+    </div>
+  </section>
+</Layout>

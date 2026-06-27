@@ -1,0 +1,54 @@
+---
+import ExternalLinkIcon from '@assets/icons/external-link-line.svg';
+import GitHubIcon from '@assets/icons/github-fill.svg';
+import LinkedInIcon from '@assets/icons/linkedin-box-fill.svg';
+import MapPinIcon from '@assets/icons/map-pin-2-line.svg';
+import { getLabels } from '@i18n/utils';
+
+const labels = getLabels(Astro.currentLocale, 'contactInfo');
+---
+
+<section class="py-16 sm:py-20">
+  <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+    <dl class="grid gap-6 lg:grid-cols-3">
+      <!-- Address -->
+      <div class="bg-surface rounded-3xl px-6 py-8">
+        <dt class="sr-only">{labels.address}</dt>
+        <dd class="flex h-full flex-col justify-between gap-12">
+          <MapPinIcon class="icon-primary" aria-hidden="true" />
+          <div class="text-base font-medium">
+            <p>{labels.location}</p>
+          </div>
+        </dd>
+      </div>
+
+      <!-- LinkedIn -->
+      <div class="bg-surface rounded-3xl px-6 py-8">
+        <dt class="sr-only">LinkedIn</dt>
+        <dd class="flex h-full flex-col justify-between gap-12">
+          <LinkedInIcon class="icon-primary" aria-hidden="true" />
+          <p class="text-base font-medium">
+            <a href={`https://${labels.linkedin}`} class="text-link" target="_blank" rel="noopener noreferrer">
+              {labels.linkedin}
+              <ExternalLinkIcon class="h-4 w-4" aria-hidden="true" />
+            </a>
+          </p>
+        </dd>
+      </div>
+
+      <!-- GitHub -->
+      <div class="bg-surface rounded-3xl px-6 py-8">
+        <dt class="sr-only">GitHub</dt>
+        <dd class="flex h-full flex-col justify-between gap-12">
+          <GitHubIcon class="icon-primary" aria-hidden="true" />
+          <p class="text-base font-medium">
+            <a href={`https://${labels.github}`} class="text-link" target="_blank" rel="noopener noreferrer">
+              {labels.github}
+              <ExternalLinkIcon class="h-4 w-4" aria-hidden="true" />
+            </a>
+          </p>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</section>

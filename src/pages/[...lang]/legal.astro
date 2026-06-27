@@ -1,0 +1,66 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLabels, defaultLocale } from '@i18n/utils';
+export { getStaticPaths } from '@i18n/utils';
+
+const labels = getLabels(Astro.currentLocale, 'legal');
+const currentLocale = Astro.currentLocale || defaultLocale;
+---
+
+<Layout description={labels.description} title={labels.title}>
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+    <div class="flex flex-col gap-4 pb-16 text-center sm:pb-20">
+      <h1 class="text-4xl font-medium tracking-tight sm:text-5xl">{labels.heading}</h1>
+      <p class="text-muted text-base">{labels.lastUpdated}</p>
+    </div>
+    <div>
+      <h2 class="mt-12 mb-6 text-xl font-medium sm:text-2xl">{labels.publisherHeading}</h2>
+      <p class="mb-4">
+        <span set:html={labels.publisherText} />
+        <a href={getRelativeLocaleUrl(currentLocale, '/contact')} class="text-link font-bold">
+          {labels.contactFormLink}
+        </a>
+      </p>
+      <h2 class="mt-12 mb-6 text-xl font-medium sm:text-2xl">{labels.hostingHeading}</h2>
+      <p class="mb-4" set:html={labels.hostingText} />
+      <h2 class="mt-12 mb-6 text-xl font-medium sm:text-2xl">{labels.intellectualPropertyHeading}</h2>
+      <p class="mb-4">
+        {labels.openSourceCreditsText}
+        <a
+          href="https://github.com/cjoyau/blast/blob/main/LICENSE"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-link"
+        >
+          {labels.licenseLink}
+        </a>
+        {labels.openSourceCreditsEnd}
+      </p>
+      <p class="mb-4" set:html={labels.contentOwnershipText} />
+      <p class="mb-4">{labels.reproductionProhibitedText}</p>
+      <h2 class="mt-12 mb-6 text-xl font-medium sm:text-2xl">{labels.personalDataHeading}</h2>
+      <p class="mb-4">{labels.personalDataIntro}</p>
+      <ul class="mb-4 ml-6 list-outside list-disc space-y-2">
+        <li set:html={labels.dataCollectionItem} />
+        <li set:html={labels.dataProcessorsItem} />
+        <li set:html={labels.userRightsItem} />
+        <li>
+          <span set:html={labels.contactRightsText} />
+          <a href={getRelativeLocaleUrl(currentLocale, '/contact')} class="text-link font-bold">
+            {labels.contactFormLink}
+          </a>
+        </li>
+        <li set:html={labels.cnilComplaintItem} />
+      </ul>
+      <p class="mb-4">
+        {labels.privacyPolicyPromptText}
+        <a href={getRelativeLocaleUrl(currentLocale, '/privacy')} class="text-link font-bold">
+          {labels.privacyPolicyLink}
+        </a>
+      </p>
+      <h2 class="mt-12 mb-6 text-xl font-medium sm:text-2xl">{labels.cookiesHeading}</h2>
+      <p class="mb-4">{labels.cookiesText}</p>
+    </div>
+  </section>
+</Layout>

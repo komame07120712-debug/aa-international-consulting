@@ -1,0 +1,18 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Cta from '@components/pricing/Cta.astro';
+import Faq from '@components/pricing/Faq.astro';
+import Heading from '@components/pricing/Heading.astro';
+import PricingTable from '@components/pricing/PricingTable.astro';
+import { getLabels } from '@i18n/utils';
+export { getStaticPaths } from '@i18n/utils';
+
+const labels = getLabels(Astro.currentLocale, 'pricing');
+---
+
+<Layout description={labels.description} title={labels.title}>
+  <Heading />
+  <PricingTable />
+  <Faq />
+  <Cta />
+</Layout>

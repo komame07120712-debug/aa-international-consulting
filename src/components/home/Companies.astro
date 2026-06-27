@@ -1,0 +1,66 @@
+---
+import { getLabels } from '@i18n/utils';
+import ThumbUpIcon from '@assets/icons/thumb-up-line.svg';
+
+const labels = getLabels(Astro.currentLocale, 'homeCompanies');
+const companies = labels.companies;
+const icons = import.meta.glob<{ default: any }>('/src/assets/company-*.svg', { eager: true });
+const rawIcons = import.meta.glob<string>('/src/assets/company-*.svg', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+});
+
+const getViewBox = (id: string) => {
+  const rawSvg = rawIcons[`/src/assets/${id}.svg`];
+  if (!rawSvg) return '0 0 200 100';
+  const match = typeof rawSvg === 'string' ? rawSvg.match(/viewBox="([^"]+)"/) : '';
+  return match ? match[1] : '0 0 200 100';
+};
+---
+
+<section class="py-16 sm:py-20">
+  <svg class="hidden" aria-hidden="true">
+    <defs>
+      {
+        companies.map((company) => {
+          const Icon = icons[`/src/assets/${company.id}.svg`].default;
+          return <Icon id={`icon-${company.id}`} />;
+        })
+      }
+    </defs>
+  </svg>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col gap-12 sm:gap-16">
+      <div class="flex justify-center gap-4">
+        <ThumbUpIcon class="fill-primary-500 h-8 w-8 shrink-0 sm:h-10 sm:w-10" aria-hidden="true" />
+        <h2 class="text-center text-3xl font-medium tracking-tight sm:text-4xl">
+          {labels.title}
+        </h2>
+      </div>
+      <div
+        class="group flex overflow-hidden mask-[linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]"
+      >
+        {
+          [0, 1].map((i) => (
+            <div
+              class="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-8 px-4 group-hover:[animation-play-state:paused]"
+              aria-hidden={i === 1 ? 'true' : undefined}
+            >
+              {companies.map((company) => {
+                return (
+                  <div class="bg-surface flex h-36 w-48 shrink-0 flex-col items-center justify-center gap-4 rounded-3xl p-6 transition-transform hover:scale-105">
+                    <svg class="icon-primary h-12 w-auto max-w-36" viewBox={getViewBox(company.id)} aria-hidden="true">
+                      <use href={`#icon-${company.id}`} />
+                    </svg>
+                    <span class="text-muted text-center text-lg leading-tight">{company.name}</span>
+                  </div>
+                );
+              })}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

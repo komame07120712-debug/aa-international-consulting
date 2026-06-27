@@ -1,0 +1,114 @@
+---
+import ExternalLinkIcon from '@assets/icons/external-link-line.svg';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLabels, defaultLocale } from '@i18n/utils';
+
+const base = import.meta.env.BASE_URL;
+const labels = getLabels(Astro.currentLocale, 'layoutFooter');
+const currentLocale = Astro.currentLocale || defaultLocale;
+
+const bottomLinks = [
+  {
+    header: labels.followUs,
+    links: [
+      {
+        name: 'LinkedIn',
+        href: 'https://' + labels.linkedin,
+        isExternal: true,
+      },
+      {
+        name: 'GitHub',
+        href: 'https://' + labels.github,
+        isExternal: true,
+      },
+    ],
+  },
+  {
+    header: labels.company,
+    links: [
+      {
+        name: labels.links.home,
+        href: getRelativeLocaleUrl(currentLocale, '/'),
+        isExternal: false,
+      },
+      {
+        name: labels.links.about,
+        href: getRelativeLocaleUrl(currentLocale, '/about'),
+        isExternal: false,
+      },
+      {
+        name: labels.links.pricing,
+        href: getRelativeLocaleUrl(currentLocale, '/pricing'),
+        isExternal: false,
+      },
+      {
+        name: labels.links.contact,
+        href: getRelativeLocaleUrl(currentLocale, '/contact'),
+        isExternal: false,
+      },
+    ],
+  },
+  {
+    header: labels.regulatory,
+    links: [
+      {
+        name: labels.links.legal,
+        href: getRelativeLocaleUrl(currentLocale, '/legal'),
+        isExternal: false,
+      },
+      {
+        name: labels.links.privacy,
+        href: getRelativeLocaleUrl(currentLocale, '/privacy'),
+        isExternal: false,
+      },
+      {
+        name: labels.links.styleguide,
+        href: getRelativeLocaleUrl(currentLocale, '/styleguide'),
+        isExternal: false,
+      },
+    ],
+  },
+];
+---
+
+<footer class="bg-surface mt-16 py-16 lg:mt-20 lg:py-20" aria-labelledby="footer-heading">
+  <h2 id="footer-heading" class="sr-only">{labels.title}</h2>
+  <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+    <div class="flex flex-col justify-between gap-12 sm:gap-16 lg:flex-row">
+      <div class="flex max-w-100 flex-col items-start gap-6 sm:gap-8">
+        <a href={getRelativeLocaleUrl(currentLocale, '/')} class="group-focus-outline rounded-md">
+          <img class="mr-1 inline" width="32" height="32" src={`${base}/logo.svg`} alt={labels.companyName} />
+          <span class="text-muted align-middle text-xl font-bold">{labels.companyName}</span>
+        </a>
+        <p class="text-muted text-base">{labels.description}</p>
+        <p class="text-muted text-sm">{labels.copyright}</p>
+      </div>
+
+      <!-- Bottom links -->
+      <div class="grid max-w-xl flex-1 grid-cols-1 gap-8 sm:grid-cols-3">
+        {
+          bottomLinks.map((group) => (
+            <div class="flex flex-col gap-4">
+              <p class="text-base font-medium">{group.header}</p>
+              <ul role="list" class="flex flex-col gap-3">
+                {group.links.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      class="text-link"
+                      target={link.isExternal ? '_blank' : undefined}
+                      rel={link.isExternal ? 'noopener noreferrer' : undefined}
+                    >
+                      {link.name}
+                      {link.isExternal && <ExternalLinkIcon class="h-4 w-4" aria-hidden="true" />}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</footer>
