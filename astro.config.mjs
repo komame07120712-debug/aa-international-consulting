@@ -61,14 +61,14 @@ export default defineConfig({
       scriptDirective: {
         resources: ["'self'", 'data:', 'https://challenges.cloudflare.com/'],
         hashes: [
-          'sha256-QdsQr8DYqqAbXiHb2YTZ0RKtdorAfl82xF9ul9WqSOE=', // All pages
-          'sha256-AhGOxzJqJwRvnqrHXGGHOAboYLUDRi5UY2RXZQCouYI=', // index
+          'sha256-QdsQr8DYqqAbXiHb2YTZ0RKtdorAfl82xF9ul9WqSOE=', // 404, about, contact...
         ],
       },
       styleDirective: {
         resources: ["'self'"],
         hashes: [
-          'sha256-/fWDvP/zU3HvBkNs4SJCgtfIW+buR1Is+LtIxjWEFpw=', // All pages
+          'sha256-/fWDvP/zU3HvBkNs4SJCgtfIW+buR1Is+LtIxjWEFpw=', // 404, about, contact...
+          'sha256-yMUkEyhFkH67k+oYRNHlpBw6poeInLvMjeCp4BrkimQ=', // index
         ],
       },
       directives: [

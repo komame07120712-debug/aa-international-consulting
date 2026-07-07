@@ -112,10 +112,11 @@ export const fr: Translation = {
     linkedin: 'www.linkedin.com',
     github: 'github.com/cjoyau/blast',
   },
-  home: {
-    description: "Blast est un thème prêt à l'emploi conçu spécialement pour les sites web de business, marketing, SaaS et startups.",
-    title: 'Blast · Blue astro theme',
-  },
+home: {
+  description:
+    'Accounting, tax, company formation and business support for international clients in Japan.',
+  title: 'A&A International Consulting',
+},
   homeAbout: {
     title: 'A propos',
     description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate.',
@@ -173,32 +174,33 @@ export const fr: Translation = {
       },
     ],
   },
-  homeHero: {
-    title: 'Blue astro theme',
-    visibleLetters: [0, 1, 5, 6, 11],
-    description: "Thème prêt à l'emploi conçu spécialement pour les sites web de business, marketing, SaaS et startups.",
-    heroImgAlt: "Illustration de personnes collaborant pour concevoir quelque chose d'incroyable.",
-  },
-  homeServices: {
-    title: 'Services',
-    services: [
-      {
-        step: '01',
-        name: 'Conception',
-        description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-      },
-      {
-        step: '02',
-        name: 'Développement',
-        description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-      },
-      {
-        step: '03',
-        name: 'Maintenance',
-        description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-      },
-    ],
-  },
+homeHero: {
+  title: 'A&A International Consulting',
+  visibleLetters: [],
+  description:
+    'Supporting international visitors and residents in Fukuoka with business, relocation, interpretation, and local consulting services.',
+  heroImgAlt: 'Fukuoka skyline',
+},
+homeServices: {
+  title: 'Our Services',
+  services: [
+    {
+      step: '01',
+      name: 'Company Setup',
+      description: 'Company incorporation, registration, and startup support in Japan.',
+    },
+    {
+      step: '02',
+      name: 'Accounting & Tax',
+      description: 'Bookkeeping, tax filing, payroll, and accounting support for international businesses.',
+    },
+    {
+      step: '03',
+      name: 'Business Manager Visa',
+      description: 'Visa support in cooperation with experienced immigration professionals.',
+    },
+  ],
+},
   layoutFooter: {
     title: 'Pied de page',
     companyName: 'Blast',

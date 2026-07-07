@@ -1,31 +1,339 @@
 ---
-import Layout from '@layouts/Layout.astro';
-import About from '@components/home/About.astro';
-import Companies from '@components/home/Companies.astro';
-import Cta from '@components/home/Cta.astro';
-import Expertise from '@components/home/Expertise.astro';
-import Hero from '@components/home/Hero.astro';
-import Services from '@components/home/Services.astro';
-import { getLabels, locales, defaultLocale, prefixDefaultLocale } from '@i18n/utils';
-export { getStaticPaths } from '@i18n/utils';
-
-const base = import.meta.env.BASE_URL;
-const labels = getLabels(Astro.currentLocale, 'home');
-const currentLocale = Astro.currentLocale || defaultLocale;
+export function getStaticPaths() {
+  return [
+    { params: { lang: undefined } },
+    { params: { lang: 'fr' } },
+  ];
+}
 ---
 
-<Layout description={labels.description} title={labels.title}>
-  <script slot="head" is:inline define:vars={{ base, currentLocale, locales, defaultLocale, prefixDefaultLocale }}>
-    if (currentLocale === defaultLocale && !prefixDefaultLocale) {
-      const preferred = localStorage.getItem('language') || navigator.language.split('-')[0];
-      const lang = preferred && locales.includes(preferred) ? preferred : defaultLocale;
-      lang !== currentLocale && location.replace(base + '/' + lang + '/');
-    }
-  </script>
-  <Hero />
-  <Services />
-  <Expertise />
-  <About />
-  <Companies />
-  <Cta />
-</Layout>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>A&A International Consulting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: #111;
+        background: #f7fbfd;
+      }
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 8%;
+    background: #dff5ff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+
+.logo {
+    height: 60px;
+}
+
+      nav {
+        display: flex;
+        gap: 28px;
+      }
+
+      nav a {
+        color: #222;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      nav a:hover {
+        color: #1d9bf0;
+      }
+
+      section {
+        padding: 80px 8%;
+        max-width: 1150px;
+        margin: auto;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+      }
+
+      h1 {
+        font-size: 56px;
+        line-height: 1.05;
+        margin: 0 0 24px;
+      }
+
+      h2 {
+        font-size: 36px;
+        margin: 0 0 28px;
+      }
+
+      h3 {
+        font-size: 22px;
+        margin-top: 0;
+      }
+
+      p, li {
+        font-size: 19px;
+        line-height: 1.6;
+      }
+
+      .hero-img {
+        width: 100%;
+        border-radius: 28px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+      }
+
+      .card {
+        background: #dff5ff;
+        border-radius: 24px;
+        padding: 28px;
+      }
+
+      .team-img {
+        width: 100%;
+        height: 260px;
+        object-fit: cover;
+        border-radius: 20px;
+        margin-bottom: 20px;
+      }
+
+      .button {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 18px 40px;
+        background: #1d9bf0;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 14px;
+      }
+
+      .button:hover {
+        background: #0b7fd1;
+      }
+
+      .muted {
+        color: #555;
+      }
+
+      footer {
+        padding: 40px 8%;
+        background: #dff5ff;
+        font-size: 16px;
+      }
+
+      @media (max-width: 800px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 42px;
+        }
+
+        nav {
+          display: none;
+        }
+
+        .logo {
+          height: 36px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+      <img class="logo" src="/blast/logo.png" alt="A&A International Consulting" />
+
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#why">Why A&A</a>
+        <a href="#team">Team</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h1>Your Trusted Partner in Fukuoka</h1>
+        <p>
+          We make life and business in Japan easier for international residents,
+          visitors, entrepreneurs, and companies.
+        </p>
+        <p>
+          From settling into your new home to starting and growing your business,
+          A&A International Consulting connects you with the right professionals
+          and supports you every step of the way.
+        </p>
+
+        <a class="button" href="https://share-eu1.hsforms.com/2CrJdJ28iR-qsIRMnOT566g2g13cq" target="_blank">
+          Contact Us 
+        </a>
+      </div>
+
+      <img class="hero-img" src="/blast/fukuoka.png" alt="Fukuoka skyline" />
+    </section>
+
+    <section>
+      <h2>One Contact. Complete Support.</h2>
+      <p>
+        Whether you're moving to Fukuoka, launching a company, or simply need
+        trusted local advice, we coordinate everything through our network of
+        experienced professionals.
+      </p>
+      <p>
+        You don't need to know which expert to contact. Tell us your situation,
+        and we will help connect you with the right people.
+      </p>
+    </section>
+
+    <section id="services">
+      <h2>Our Services</h2>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Relocation & Living Support</h3>
+          <p>
+            Apartment search, utility setup, banking assistance, hospital
+            appointments, school information, interpretation, and local orientation.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Business Support</h3>
+          <p>
+            Company formation, Business Manager Visa coordination, office search,
+            business planning, and administrative support.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Professional Network</h3>
+          <p>
+            Access to certified tax accountants, immigration lawyers, judicial
+            scriveners, administrative scriveners, social insurance consultants,
+            and real estate professionals.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Everyday Concierge</h3>
+          <p>
+            Practical support for medical appointments, government procedures,
+            driver's license guidance, car purchases, moving, and daily life in Japan.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="why">
+      <h2>Why Choose A&A?</h2>
+
+      <div class="grid">
+        <div class="card">
+          <h3>English-Friendly Support</h3>
+          <p>
+            We help international clients understand Japanese procedures clearly
+            and comfortably.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Trusted Local Connections</h3>
+          <p>
+            We work closely with certified professionals and reliable local partners
+            in Fukuoka.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Personal Coordination</h3>
+          <p>
+            We do not simply introduce services. We help coordinate the process
+            and stay with you along the way.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Our Trusted Partners</h2>
+
+      <div class="grid">
+        <div class="card">Kaku Asumi Tax Office</div>
+        <div class="card">Immigration Lawyers</div>
+        <div class="card">Judicial Scriveners</div>
+        <div class="card">Administrative Scriveners</div>
+        <div class="card">Social Insurance Consultants</div>
+        <div class="card">Real Estate Professionals</div>
+      </div>
+    </section>
+
+    <section id="team">
+      <h2>Meet Our Team</h2>
+
+      <div class="grid">
+        <div class="card">
+          <img class="team-img" src="/blast/ayaka.png" alt="Ayaka Mori" />
+          <h3>Ayaka Mori</h3>
+          <p>
+            International Business Consultant. Helping international
+            entrepreneurs and residents navigate business and daily life in Japan.
+          </p>
+        </div>
+
+        <div class="card">
+          <img class="team-img" src="/blast/asumi.png" alt="Asumi Kaku" />
+          <h3>Asumi Kaku</h3>
+          <p>
+            Founder & Certified Tax Accountant and founder of Kaku Asumi Tax Office,
+            providing expert tax and accounting services for international clients.
+          </p>
+        </div>
+
+        <div class="card">
+          <img class="team-img" src="/blast/mitsuko.png" alt="Mitsuko Mori" />
+          <h3>Mitsuko Mori</h3>
+          <p>
+            Client Relations. Supporting clients with communication, coordination,
+            and day-to-day assistance throughout their journey in Japan.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Let's Talk</h2>
+      <p>
+        Whether you're planning your move to Japan, starting a business, or simply
+        looking for reliable local support, we'd love to hear from you.
+      </p>
+
+      <a class="button" href="https://share-eu1.hsforms.com/2CrJdJ28iR-qsIRMnOT566g2g13cq" target="_blank">
+        Contact Us 
+      </a>
+
+      <p class="muted">We normally respond within 2–3 business days.</p>
+    </section>
+
+    <footer>
+      © 2026 A&A International Consulting · Fukuoka, Japan
+    </footer>
+  </body>
+</html>
